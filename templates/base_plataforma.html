@@ -14,7 +14,12 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto align-items-center">
+            <li class="nav-item mr-3">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
+                    <span class="toggle-icon">&#9790;</span>
+                </button>
+            </li>
             <li class="nav-item">
                 <a class="btn-sair" href="{% url 'sair' %}">Sair</a>
             </li>
@@ -55,4 +60,39 @@
         </div>
     </div>
 </div>
+
+<script>
+function toggleTheme() {
+    var html = document.documentElement;
+    html.classList.add('theme-transitioning');
+
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+
+    if (next === 'dark') {
+        html.setAttribute('data-theme', 'dark');
+    } else {
+        html.removeAttribute('data-theme');
+    }
+
+    localStorage.setItem('nutrilab-theme', next);
+
+    var icon = document.querySelector('.toggle-icon');
+    if (icon) {
+        icon.innerHTML = next === 'dark' ? '&#9728;' : '&#9790;';
+    }
+
+    setTimeout(function() {
+        html.classList.remove('theme-transitioning');
+    }, 500);
+}
+
+(function() {
+    var theme = localStorage.getItem('nutrilab-theme') || 'light';
+    var icon = document.querySelector('.toggle-icon');
+    if (icon) {
+        icon.innerHTML = theme === 'dark' ? '&#9728;' : '&#9790;';
+    }
+})();
+</script>
 {% endblock %}

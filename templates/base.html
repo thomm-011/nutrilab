@@ -235,7 +235,317 @@
         background: var(--sage-light);
         color: white;
       }
+
+      /* ============================
+         DARK MODE
+         ============================ */
+      [data-theme="dark"] {
+        --forest: #A7C4BC;
+        --forest-light: #8FB8AC;
+        --sage: #9AB8AE;
+        --sage-light: #6A9B8C;
+        --cream: #2A2520;
+        --cream-dark: #23201B;
+        --gold: #DDA15E;
+        --gold-light: #E8C07A;
+        --white: #1A1B1E;
+        --off-white: #141517;
+        --text-dark: #E8E4DF;
+        --text-muted: #9B9590;
+        --border: #2E2C28;
+        --danger: #E87C82;
+        --danger-bg: #2A1A1A;
+        --success-bg: #1A2A1E;
+        --warning-bg: #2A2518;
+        --info-bg: #1A1E2A;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+        --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      [data-theme="dark"] body {
+        background: var(--off-white);
+        color: var(--text-dark);
+      }
+
+      [data-theme="dark"] .navbar-nutri {
+        background: #0F1A14;
+      }
+
+      [data-theme="dark"] .alert-danger {
+        background: var(--danger-bg);
+        color: var(--danger);
+        border-left-color: var(--danger);
+      }
+
+      [data-theme="dark"] .alert-success {
+        background: var(--success-bg);
+        color: #6EE090;
+        border-left-color: #4ADE80;
+      }
+
+      [data-theme="dark"] .alert-warning {
+        background: var(--warning-bg);
+        color: #E8B86A;
+        border-left-color: var(--gold);
+      }
+
+      [data-theme="dark"] .alert-info,
+      [data-theme="dark"] .alert-primary {
+        background: var(--info-bg);
+        color: #7DA8E8;
+        border-left-color: #5B8AD6;
+      }
+
+      [data-theme="dark"] .form-control {
+        background: #222328;
+        border-color: var(--border);
+        color: var(--text-dark);
+      }
+
+      [data-theme="dark"] .form-control:focus {
+        border-color: var(--sage-light);
+        box-shadow: 0 0 0 3px rgba(106, 155, 140, 0.2);
+      }
+
+      [data-theme="dark"] select.form-control {
+        background-color: #222328;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239B9590' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        color: var(--text-dark);
+        border-color: var(--border);
+      }
+
+      [data-theme="dark"] select.form-control option {
+        background: #222328;
+        color: var(--text-dark);
+      }
+
+      [data-theme="dark"] .modal-content {
+        background: var(--white);
+      }
+
+      [data-theme="dark"] .modal-header {
+        border-bottom-color: var(--border);
+      }
+
+      [data-theme="dark"] .table thead th {
+        background: #0F1A14;
+      }
+
+      [data-theme="dark"] .table td,
+      [data-theme="dark"] .table th {
+        border-color: var(--border);
+        color: var(--text-dark);
+      }
+
+      [data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) {
+        background: rgba(154, 184, 174, 0.04);
+      }
+
+      [data-theme="dark"] .input-group-text {
+        background: #2A2520;
+        border-color: var(--border);
+        color: var(--sage);
+      }
+
+      [data-theme="dark"] .btn-success {
+        background: var(--sage-light);
+        border-color: var(--sage-light);
+        color: #0F1A14;
+      }
+
+      [data-theme="dark"] .btn-success:hover {
+        background: var(--sage);
+        border-color: var(--sage);
+      }
+
+      [data-theme="dark"] .btn-outline-success {
+        color: var(--sage);
+        border-color: var(--sage);
+      }
+
+      [data-theme="dark"] .btn-outline-success:hover {
+        background: var(--sage-light);
+        border-color: var(--sage-light);
+        color: #0F1A14;
+      }
+
+      [data-theme="dark"] .close {
+        color: var(--text-muted);
+        text-shadow: none;
+      }
+
+      [data-theme="dark"] .platform-sidebar {
+        background: #18191C;
+        border-right-color: var(--border);
+      }
+
+      [data-theme="dark"] .card-lateral:hover {
+        background: rgba(154, 184, 174, 0.06);
+        border-color: var(--sage-light);
+      }
+
+      [data-theme="dark"] .card-paciente {
+        background: var(--white);
+        border-color: var(--border);
+      }
+
+      [data-theme="dark"] .card-paciente:hover {
+        border-color: var(--sage-light);
+      }
+
+      [data-theme="dark"] .patient-header {
+        background: var(--white);
+        border-color: var(--border);
+      }
+
+      [data-theme="dark"] .foto-perfil img {
+        border-color: #2A2520;
+      }
+
+      [data-theme="dark"] .patient-header img {
+        border-color: #2A2520;
+      }
+
+      [data-theme="dark"] .chart-container {
+        background: var(--white);
+        border-color: var(--border);
+      }
+
+      [data-theme="dark"] .fundo-alimentar {
+        background: var(--white);
+        border-color: var(--border);
+      }
+
+      [data-theme="dark"] .head-refeicao {
+        background: linear-gradient(135deg, #0F1A14 0%, #1A3028 100%);
+      }
+
+      [data-theme="dark"] .body-refeicao {
+        background: var(--off-white);
+      }
+
+      [data-theme="dark"] .opcao {
+        background: var(--white);
+        border-color: var(--border);
+      }
+
+      [data-theme="dark"] .btn-nutri {
+        background: var(--sage-light);
+        color: #0F1A14;
+      }
+
+      [data-theme="dark"] .btn-nutri:hover {
+        background: var(--sage);
+        color: #0F1A14;
+      }
+
+      [data-theme="dark"] .btn-nutri-outline {
+        color: var(--sage);
+        border-color: var(--sage);
+      }
+
+      [data-theme="dark"] .btn-nutri-outline:hover {
+        background: var(--sage-light);
+        color: #0F1A14;
+        border-color: var(--sage-light);
+      }
+
+      [data-theme="dark"] .btn-nutri-secondary {
+        color: var(--sage);
+        border-color: var(--border);
+      }
+
+      [data-theme="dark"] .btn-nutri-secondary:hover {
+        border-color: var(--sage-light);
+        background: rgba(154, 184, 174, 0.06);
+      }
+
+      [data-theme="dark"] .modal-toggle-group .btn.active-toggle {
+        background: var(--sage-light);
+        color: #0F1A14;
+        border-color: var(--sage-light);
+      }
+
+      [data-theme="dark"] .macro-badge {
+        background: #2A2520;
+        color: var(--sage);
+      }
+
+      /* Auth pages dark mode */
+      [data-theme="dark"] .area_cadastrar .titulo {
+        color: var(--forest);
+      }
+
+      [data-theme="dark"] .input-form {
+        background: #222328;
+        border-color: var(--border);
+        color: var(--text-dark);
+      }
+
+      [data-theme="dark"] .input-form:focus {
+        border-color: var(--sage-light) !important;
+        box-shadow: 0 0 0 3px rgba(106, 155, 140, 0.2) !important;
+      }
+
+      [data-theme="dark"] .auth-footer {
+        border-top-color: var(--border);
+      }
+
+      [data-theme="dark"] .foto-upload-preview {
+        border-color: #2A2520;
+      }
+
+      /* Dark mode toggle */
+      .theme-toggle {
+        background: none;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: var(--radius-sm);
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        padding: 6px 12px;
+        font-size: 16px;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        line-height: 1;
+      }
+
+      .theme-toggle:hover {
+        color: white;
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .theme-toggle .toggle-icon {
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      [data-theme="dark"] .theme-toggle .toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      /* Smooth theme transition */
+      html.theme-transitioning,
+      html.theme-transitioning *,
+      html.theme-transitioning *::before,
+      html.theme-transitioning *::after {
+        transition: background-color 0.4s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+      }
     </style>
+
+    <script>
+      (function() {
+        var theme = localStorage.getItem('nutrilab-theme') || 'light';
+        if (theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
   </head>
   <body>
 
