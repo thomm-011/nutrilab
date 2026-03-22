@@ -1,0 +1,380 @@
+/* ============================
+   NAVBAR
+   ============================ */
+.navbar-nutri {
+    background: var(--forest);
+    padding: 12px 24px;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-nutri .navbar-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: white !important;
+    letter-spacing: -0.3px;
+}
+
+.navbar-nutri .navbar-brand span {
+    color: var(--gold);
+}
+
+.navbar-nutri .nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 500;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.navbar-nutri .nav-link:hover {
+    color: white !important;
+}
+
+.navbar-nutri .btn-sair {
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.navbar-nutri .btn-sair:hover {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================
+   SIDEBAR
+   ============================ */
+.platform-sidebar {
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    min-height: calc(100vh - 56px);
+    padding: 24px 12px;
+}
+
+.platform-sidebar + .platform-content {
+    margin-left: 8px;
+}
+
+.card-lateral {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 16px;
+    color: var(--text-dark);
+    text-align: center;
+    transition: var(--transition);
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.card-lateral:hover {
+    border-color: var(--sage);
+    background: rgba(82, 121, 111, 0.04);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.card-lateral img {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 10px;
+    opacity: 0.7;
+}
+
+.card-lateral h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sage);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.link-lateral {
+    text-decoration: none !important;
+}
+
+.link-lateral:hover {
+    text-decoration: none !important;
+}
+
+/* ============================
+   MAIN CONTENT
+   ============================ */
+.platform-content {
+    padding: 32px 48px 32px 40px;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 1.8rem;
+    color: var(--forest);
+    margin: 0;
+}
+
+.titulo {
+    font-family: 'DM Serif Display', serif;
+    color: var(--forest);
+}
+
+/* ============================
+   PATIENT CARDS
+   ============================ */
+.card-paciente {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    color: var(--text-dark);
+    transition: var(--transition);
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.card-paciente:hover {
+    border-color: var(--sage-light);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+}
+
+.link-hover {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.link-hover:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.foto-perfil {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.foto-perfil img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--cream);
+}
+
+.dados {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.dados:first-of-type {
+    font-size: 16px;
+    color: var(--forest);
+}
+
+.dados:last-of-type {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 13px;
+}
+
+/* ============================
+   PATIENT PROFILE HEADER
+   ============================ */
+.patient-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 24px;
+}
+
+.patient-header img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--cream);
+}
+
+.patient-header .patient-info h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--forest);
+    margin-bottom: 4px;
+}
+
+.patient-header .patient-info h6 {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0;
+}
+
+.descricao {
+    margin-left: 0;
+}
+
+/* ============================
+   BUTTONS
+   ============================ */
+.btn-nutri {
+    background: var(--forest);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: var(--transition);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    cursor: pointer;
+}
+
+.btn-nutri:hover {
+    background: var(--forest-light);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-nutri-outline {
+    background: transparent;
+    color: var(--forest);
+    border: 1.5px solid var(--forest);
+    border-radius: var(--radius-sm);
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: var(--transition);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    cursor: pointer;
+}
+
+.btn-nutri-outline:hover {
+    background: var(--forest);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-nutri-secondary {
+    background: transparent;
+    color: var(--sage);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: var(--transition);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    cursor: pointer;
+}
+
+.btn-nutri-secondary:hover {
+    border-color: var(--sage);
+    color: var(--forest);
+    background: rgba(82, 121, 111, 0.04);
+}
+
+.action-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+/* ============================
+   MODAL
+   ============================ */
+.modal-title.titulo {
+    font-size: 1.3rem;
+}
+
+/* ============================
+   CHART CONTAINER
+   ============================ */
+.chart-container {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-top: 24px;
+}
+
+.chart-container h3 {
+    font-size: 1.1rem;
+    color: var(--forest);
+    margin-bottom: 16px;
+}
+
+/* ============================
+   FOTO UPLOAD PREVIEW
+   ============================ */
+.foto-upload-preview {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 3px solid var(--cream);
+    box-shadow: var(--shadow-sm);
+}
+
+.foto-upload-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ============================
+   MESSAGES AREA
+   ============================ */
+.messages-area {
+    margin-bottom: 16px;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+@media (max-width: 1300px) {
+    .descricao {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .platform-content {
+        padding: 20px 16px;
+    }
+
+    .platform-sidebar {
+        min-height: auto;
+        display: flex;
+        gap: 8px;
+        padding: 12px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .card-lateral {
+        margin-bottom: 0;
+    }
+}

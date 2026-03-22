@@ -1,0 +1,112 @@
+{% extends 'base_plataforma.html' %}
+{% load static %}
+
+{% block 'plataforma' %}
+
+{% if messages %}
+<div class="messages-area">
+    {% for message in messages %}
+        <div class="alert {{message.tags}}">{{message}}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="page-header">
+    <h1>Pacientes</h1>
+    <button type="button" class="btn-nutri" data-toggle="modal" data-target="#modal">
+        + Novo paciente
+    </button>
+</div>
+
+<div class="row">
+    {% for paciente in pacientes %}
+        <div class="col-md-4" style="animation: fadeInUp 0.4s ease-out; animation-delay: {{ forloop.counter0 }}00ms; animation-fill-mode: both;">
+            <a href="{% url 'dados_paciente' paciente.id %}" class="link-hover">
+                <div class="card-paciente">
+                    <div class="foto-perfil">
+                        {% if paciente.foto %}
+                            <img src="{{paciente.foto.url}}" alt="{{paciente.nome}}">
+                        {% elif paciente.sexo == "M" %}
+                            <img src="{% static 'plataforma/img/perfil2.png' %}" alt="Perfil">
+                        {% else %}
+                            <img src="{% static 'plataforma/img/perfil1.png' %}" alt="Perfil">
+                        {% endif %}
+                    </div>
+                    <p class="dados">{{paciente.nome}}</p>
+                    <p class="dados">{{paciente.idade}} Anos</p>
+                    <p class="dados">{{paciente.email}}</p>
+                </div>
+            </a>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+                <h3 style="color: var(--sage-light); margin-bottom: 8px;">Nenhum paciente cadastrado</h3>
+                <p>Clique em "+ Novo paciente" para começar</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title titulo" id="exampleModalLabel">Cadastrar paciente</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+                <div class="text-center mb-3">
+                    <div class="foto-upload-preview" id="fotoPreview">
+                        <img src="{% static 'plataforma/img/perfil2.png' %}" alt="Perfil" id="fotoImg">
+                    </div>
+                    <label for="fotoInput" class="btn-nutri-outline" style="cursor: pointer; margin-top: 10px; display: inline-block; padding: 6px 16px; font-size: 13px;">
+                        Escolher foto
+                    </label>
+                    <input type="file" id="fotoInput" name="foto" accept="image/*" style="display: none;" onchange="previewFoto(this)">
+                </div>
+
+                <label>Nome</label>
+                <input type="text" placeholder="Digite o nome do paciente..." class="form-control mb-3" name="nome">
+
+                <label>Sexo</label>
+                <select name="sexo" class="form-control mb-3">
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
+
+                <label>Idade</label>
+                <input type="number" placeholder="0" class="form-control mb-3" name="idade">
+
+                <label>E-mail</label>
+                <input type="email" placeholder="exemple@email.com" class="form-control mb-3" name="email">
+
+                <label>Telefone</label>
+                <input type="text" placeholder="+55 (00) 00000-0000" class="form-control mb-4" name="telefone">
+
+                <input type="submit" class="btn-nutri" value="Registrar" style="width: 100%; border: none;">
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function previewFoto(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('fotoImg').src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base_plataforma.html' %}
+{% load static %}
+
+{% block 'plataforma' %}
+
+{% if messages %}
+<div class="messages-area">
+    {% for message in messages %}
+        <div class="alert {{message.tags}}">{{message}}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="page-header">
+    <h1>Dados do Paciente</h1>
+</div>
+
+<p style="color: var(--text-muted); margin-bottom: 24px;">Selecione um paciente para visualizar ou adicionar dados</p>
+
+<div class="row">
+    {% for paciente in pacientes %}
+        <div class="col-md-4">
+            <a href="{% url 'dados_paciente' paciente.id %}" class="link-hover">
+                <div class="card-paciente">
+                    <div class="foto-perfil">
+                        {% if paciente.foto %}
+                            <img src="{{paciente.foto.url}}" alt="{{paciente.nome}}">
+                        {% elif paciente.sexo == "M" %}
+                            <img src="{% static 'plataforma/img/perfil2.png' %}" alt="Perfil">
+                        {% else %}
+                            <img src="{% static 'plataforma/img/perfil1.png' %}" alt="Perfil">
+                        {% endif %}
+                    </div>
+                    <p class="dados">{{paciente.nome}}</p>
+                    <p class="dados">{{paciente.idade}} Anos</p>
+                    <p class="dados">{{paciente.email}}</p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

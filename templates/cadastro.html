@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'autenticacao/css/cadastro.css' %}">
+{% endblock %}
+
+{% block 'titulo' %}Cadastre-se{% endblock %}
+
+{% block 'body' %}
+<div class="container-fluid p-0">
+    <div class="row no-gutters auth-wrapper">
+        <div class="col-md-4 sidebar">
+            <div class="sidebar-brand">
+                <div class="logo_sidebar">
+                    <img class="img_logo_sidebar" src="{% static 'autenticacao/img/logo_nutri_lab.png' %}" alt="NutriLab">
+                </div>
+                <h1>NutriLab</h1>
+                <p>Nutrição inteligente</p>
+            </div>
+            <div class="sidebar-decoration">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="area_cadastrar">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {{message.tags}}">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <h2 class="titulo">Crie sua conta</h2>
+                <p class="sub-titulo">Comece a gerenciar seus pacientes hoje</p>
+                <hr>
+
+                <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
+                    <span class="bold">Nome de usuário</span>
+                    <input class="form-control input-form" name="usuario" type="text" placeholder="Digite seu nome...">
+
+                    <span class="bold">E-mail</span>
+                    <input class="form-control input-form" name="email" type="email" placeholder="Digite seu E-mail...">
+
+                    <div class="password-row">
+                        <div>
+                            <span class="bold">Senha</span>
+                            <input class="form-control input-form" name="senha" type="password" placeholder="Min. 6 caracteres">
+                        </div>
+                        <div>
+                            <span class="bold">Confirmar senha</span>
+                            <input class="form-control input-form" name="confirmar_senha" type="password" placeholder="Confirme a senha">
+                        </div>
+                    </div>
+
+                    <button class="btn-first" type="submit">Criar conta</button>
+                </form>
+
+                <div class="auth-footer">
+                    <span>Já possui uma conta?</span>
+                    <a href="{% url 'logar' %}">Entrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

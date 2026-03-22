@@ -1,0 +1,159 @@
+{% extends 'base_plataforma.html' %}
+{% load static %}
+
+{% block 'plataforma' %}
+
+{% if messages %}
+<div class="messages-area">
+    {% for message in messages %}
+        <div class="alert {{message.tags}}">{{message}}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="patient-header">
+    {% if paciente.foto %}
+        <img src="{{paciente.foto.url}}" alt="{{paciente.nome}}">
+    {% elif paciente.sexo == "M" %}
+        <img src="{% static 'plataforma/img/perfil2.png' %}" alt="Perfil">
+    {% else %}
+        <img src="{% static 'plataforma/img/perfil1.png' %}" alt="Perfil">
+    {% endif %}
+    <div class="patient-info">
+        <h4>{{paciente.nome}}</h4>
+        <h6>{{paciente.idade}} Anos</h6>
+    </div>
+</div>
+
+<div class="action-bar">
+    <button type="button" class="btn-nutri" data-toggle="modal" data-target="#modal">
+        + Nova refeição
+    </button>
+    <button type="button" class="btn-nutri-secondary">
+        Exportar plano
+    </button>
+</div>
+
+<div class="fundo-alimentar">
+    {% for re in refeicao %}
+    <div class="refeicao">
+        <div class="head-refeicao">
+            <span>{{re.titulo}}</span>
+            <span>{{re.horario}}h</span>
+        </div>
+
+        <div class="body-refeicao">
+            {% for o1 in opcao %}
+                {% if o1.refeicao == re %}
+                <div class="opcao">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <img width="100%" src="{{o1.imagem.url}}" alt="Opção">
+                        </div>
+                        <div class="col-md-10">
+                            {{o1.descricao}}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% empty %}
+    <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+        <h3 style="color: var(--sage-light); margin-bottom: 8px;">Nenhuma refeição cadastrada</h3>
+        <p>Clique em "+ Nova refeição" para começar o plano alimentar</p>
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title titulo">Adicionar ao plano</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="modal-toggle-group">
+                <button type="button" class="btn btn-outline-success active-toggle" onclick="exibe_refeicao(this)">
+                    Refeição
+                </button>
+                <button type="button" class="btn btn-outline-success" onclick="exibe_opcao(this)">
+                    Opção
+                </button>
+            </div>
+
+            <div id="form-refeicao" style="display: block;">
+                <form action="{% url 'refeicao' paciente.id %}" method="POST">{% csrf_token %}
+                    <label>Título</label>
+                    <input type="text" class="form-control mb-3" placeholder="Ex: Café da manhã" name="titulo">
+
+                    <label>Horário</label>
+                    <input type="time" class="form-control mb-3" name="horario">
+
+                    <h5 class="titulo" style="font-size: 1rem; margin: 16px 0 12px;">Macronutrientes</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Carboidratos</label>
+                            <input type="text" class="form-control mb-3" placeholder="g" name="carboidratos">
+                        </div>
+                        <div class="col-md-4">
+                            <label>Proteínas</label>
+                            <input type="text" class="form-control mb-3" placeholder="g" name="proteinas">
+                        </div>
+                        <div class="col-md-4">
+                            <label>Gorduras</label>
+                            <input type="text" class="form-control mb-3" placeholder="g" name="gorduras">
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Cadastrar refeição" class="btn-nutri" style="width: 100%; border: none; margin-top: 8px;">
+                </form>
+            </div>
+
+            <div id="form-opcao" style="display: none;">
+                <form action="{% url 'opcao' paciente.id %}" method="POST" enctype='multipart/form-data'>{% csrf_token %}
+
+                    <label>Selecione a refeição</label>
+                    <select class="form-control mb-3" name="refeicao">
+                        {% for re in refeicao %}
+                            <option value="{{re.id}}">{{re.titulo}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label>Imagem</label>
+                    <input type="file" class="form-control mb-3" name="imagem">
+
+                    <label>Descrição</label>
+                    <textarea class="form-control mb-3" name='descricao' rows="3" placeholder="Descreva a opção..."></textarea>
+
+                    <input type="submit" value="Cadastrar opção" class="btn-nutri" style="width: 100%; border: none; margin-top: 8px;">
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function exibe_refeicao(btn){
+        document.getElementById('form-refeicao').style.display = "block"
+        document.getElementById('form-opcao').style.display = "none"
+        document.querySelectorAll('.modal-toggle-group .btn').forEach(b => b.classList.remove('active-toggle'))
+        if(btn) btn.classList.add('active-toggle')
+    }
+
+    function exibe_opcao(btn){
+        document.getElementById('form-refeicao').style.display = "none"
+        document.getElementById('form-opcao').style.display = "block"
+        document.querySelectorAll('.modal-toggle-group .btn').forEach(b => b.classList.remove('active-toggle'))
+        if(btn) btn.classList.add('active-toggle')
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'plataforma/css/css.css' %}">
+    <link rel="stylesheet" href="{% static 'plataforma/css/plano_alimentar.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+{% if user.is_authenticated %}
+<nav class="navbar navbar-expand-lg navbar-dark navbar-nutri">
+    <a class="navbar-brand" href="{% url 'pacientes' %}">Nutri<span>Lab</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="btn-sair" href="{% url 'sair' %}">Sair</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endif %}
+
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class="col-md-2 platform-sidebar">
+            <a href="{% url 'pacientes' %}" class="link-lateral">
+                <div class="card-lateral">
+                    <img src="{% static 'plataforma/img/paciente.png' %}" alt="Pacientes">
+                    <h3>Gerenciar Pacientes</h3>
+                </div>
+            </a>
+
+            <a href="{% url 'dados_paciente_listar' %}" class="link-lateral">
+                <div class="card-lateral">
+                    <img src="{% static 'plataforma/img/dados_paciente.png' %}" alt="Dados">
+                    <h3>Dados do Pacientes</h3>
+                </div>
+            </a>
+
+            <a href="{% url 'plano_alimentar_listar' %}" class="link-lateral">
+                <div class="card-lateral">
+                    <img src="{% static 'plataforma/img/plano_alimentar.png' %}" alt="Plano">
+                    <h3>Plano alimentar</h3>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-10 platform-content">
+            {% block 'plataforma' %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

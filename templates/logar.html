@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'autenticacao/css/cadastro.css' %}">
+{% endblock %}
+
+{% block 'titulo' %}Login{% endblock %}
+
+{% block 'body' %}
+<div class="container-fluid p-0">
+    <div class="row no-gutters auth-wrapper">
+        <div class="col-md-4 sidebar">
+            <div class="sidebar-brand">
+                <div class="logo_sidebar">
+                    <img class="img_logo_sidebar" src="{% static 'autenticacao/img/logo_nutri_lab.png' %}" alt="NutriLab">
+                </div>
+                <h1>NutriLab</h1>
+                <p>Nutrição inteligente</p>
+            </div>
+            <div class="sidebar-decoration">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="area_cadastrar">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {{message.tags}}">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <h2 class="titulo">Bem-vindo de volta</h2>
+                <p class="sub-titulo">Entre na sua conta para continuar</p>
+                <hr>
+
+                <form action="" method="POST">{% csrf_token %}
+                    <span class="bold">Nome de usuário</span>
+                    <input class="form-control input-form" name="usuario" type="text" placeholder="Digite seu nome...">
+
+                    <span class="bold">Senha</span>
+                    <input class="form-control input-form" name="senha" type="password" placeholder="Digite sua senha...">
+
+                    <button class="btn-first" type="submit">Entrar</button>
+                </form>
+
+                <div class="auth-footer">
+                    <span>Não tem uma conta?</span>
+                    <a href="{% url 'cadastro' %}">Cadastre-se</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

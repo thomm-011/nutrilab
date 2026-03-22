@@ -1,0 +1,249 @@
+{% extends 'base_plataforma.html' %}
+{% load static %}
+
+{% block 'plataforma' %}
+
+{% if messages %}
+<div class="messages-area">
+    {% for message in messages %}
+        <div class="alert {{message.tags}}">{{message}}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="patient-header">
+    {% if paciente.foto %}
+        <img src="{{paciente.foto.url}}" alt="{{paciente.nome}}">
+    {% elif paciente.sexo == "M" %}
+        <img src="{% static 'plataforma/img/perfil2.png' %}" alt="Perfil">
+    {% else %}
+        <img src="{% static 'plataforma/img/perfil1.png' %}" alt="Perfil">
+    {% endif %}
+    <div class="patient-info">
+        <h4>{{paciente.nome}}</h4>
+        <h6>{{paciente.idade}} Anos &middot; {{paciente.email}}</h6>
+    </div>
+</div>
+
+<div class="action-bar">
+    <button type="button" class="btn-nutri" data-toggle="modal" data-target="#modal">
+        + Adicionar dados
+    </button>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Peso</th>
+            <th scope="col">Altura</th>
+            <th scope="col">% Gordura</th>
+            <th scope="col">% Músculo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dado in dados_paciente %}
+        <tr>
+            <th scope="row">{{dado.peso}} Kg</th>
+            <td>{{dado.altura}} cm</td>
+            <td>{{dado.percentual_gordura}}%</td>
+            <td>{{dado.percentual_musculo}}%</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 32px;">
+                Nenhum dado registrado ainda
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="chart-container">
+    <h3>Evolução de Peso</h3>
+    <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    fetch("/grafico_peso/{{paciente.id}}/",{
+        method: 'POST',
+    }).then(function(result){
+        return result.json()
+    }).then(function(data_paciente){
+
+        const data = {
+            labels: data_paciente['labels'],
+            datasets: [{
+                label: 'Peso (Kg)',
+                backgroundColor: 'rgba(82, 121, 111, 0.1)',
+                borderColor: '#1B4332',
+                borderWidth: 2,
+                pointBackgroundColor: '#1B4332',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                data: data_paciente['peso'],
+                fill: true,
+                tension: 0.4,
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            font: {
+                                family: "'Plus Jakarta Sans', sans-serif",
+                                weight: '600'
+                            },
+                            color: '#1B4332'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Plus Jakarta Sans', sans-serif"
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Plus Jakarta Sans', sans-serif"
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    })
+</script>
+
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title titulo">Registrar dados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="{% url 'dados_paciente' paciente.id %}" method="POST">{% csrf_token %}
+                    <h5 class="titulo" style="font-size: 1.1rem; margin-bottom: 16px;">Medidas corporais</h5>
+                    <div class="form-row">
+                        <div class="col-md mb-3">
+                            <label>Peso</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder=".." name="peso">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Kg</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md mb-3'>
+                            <label>Altura</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder=".." name="altura">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class='col-md mb-3'>
+                            <label>Percentual de gordura</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder=".." name="gordura">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md mb-3'>
+                            <label>Percentual de músculo</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder=".." name="musculo">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="margin: 16px 0;">
+                    <h5 class="titulo" style="font-size: 1.1rem; margin-bottom: 16px;">Dados laboratoriais</h5>
+
+                    <div class="form-row">
+                        <div class='col-md mb-3'>
+                            <label>Colesterol HDL</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder=".." name="hdl">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">mg/dL</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md mb-3'>
+                            <label>Colesterol LDL</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder=".." name="ldl">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">mg/dL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class='col-md mb-3'>
+                            <label>Colesterol total</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder=".." name="ctotal">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">mg/dL</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md mb-3'>
+                            <label>Triglicerídeos</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder=".." name="trigliceridios">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">mg/dL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Salvar dados" class="btn-nutri" style="width: 100%; border: none; margin-top: 8px;">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

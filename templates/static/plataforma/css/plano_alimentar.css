@@ -1,0 +1,130 @@
+/* ============================
+   PLANO ALIMENTAR
+   ============================ */
+.fundo-alimentar {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+}
+
+.refeicao {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: var(--transition);
+    margin-bottom: 20px;
+}
+
+.refeicao:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--sage-light);
+}
+
+.refeicao:last-child {
+    margin-bottom: 0;
+}
+
+.head-refeicao {
+    background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 100%);
+    padding: 18px 24px;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.head-refeicao span:first-child {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: -0.2px;
+}
+
+.head-refeicao span:last-child {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 500;
+}
+
+.body-refeicao {
+    padding: 20px 24px;
+    font-weight: 400;
+    background: var(--off-white);
+}
+
+.opcao {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: var(--transition);
+}
+
+.opcao:last-child {
+    margin-bottom: 0;
+}
+
+.opcao:hover {
+    border-color: var(--sage-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.opcao img {
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+}
+
+.opcao .col-md-10 {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+/* ============================
+   MODAL TOGGLE BUTTONS
+   ============================ */
+.modal-toggle-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.modal-toggle-group .btn {
+    flex: 1;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 10px;
+    transition: var(--transition);
+}
+
+.modal-toggle-group .btn.active-toggle {
+    background: var(--forest);
+    color: white;
+    border-color: var(--forest);
+}
+
+/* ============================
+   MACROS DISPLAY
+   ============================ */
+.macro-badges {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.macro-badge {
+    background: var(--cream);
+    color: var(--sage);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
